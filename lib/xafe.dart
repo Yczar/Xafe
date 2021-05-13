@@ -9,6 +9,7 @@ class Xafe extends StatelessWidget {
     return ScaleAware(
       config: const ScaleConfig(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Xafe',
         theme: xafeTheme(context),
         home: SplashScreen(),
