@@ -23,7 +23,7 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Neurial
+    - family: EuclidaCircular
       fonts:
         - asset: assets/fonts/EuclidaCircular/EuclidCircularA-Bold.ttf
           weight: 600
