@@ -118,6 +118,6 @@ linter:
     - use_is_even_rather_than_modulo
     - use_late_for_private_fields_and_variables
     - use_raw_strings
-    - use_rethrow_when_possible\
+    - use_rethrow_when_possible
     - valid_regexps
     - void_checks
