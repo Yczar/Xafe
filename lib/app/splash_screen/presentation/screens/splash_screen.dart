@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/app/authentication/presentation/screens/signup/signup_screen_1.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/values/colors/colors.dart';
+import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -59,24 +61,32 @@ class SplashScreen extends StatelessWidget {
                         text: 'Login',
                       ),
                       const YMargin(70),
-                      RichText(
-                        text: const TextSpan(
-                            text: 'New here?',
-                            style: TextStyle(
-                              color: kColorWhite,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: ' Create an account',
-                                style: TextStyle(
-                                  color: kColorWhite,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
-                                ),
+                      InkWell(
+                        onTap: () {
+                          navigate(
+                            context,
+                            SignUpScreen1(),
+                          );
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                              text: 'New here?',
+                              style: TextStyle(
+                                color: kColorWhite,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
                               ),
-                            ]),
+                              children: [
+                                TextSpan(
+                                  text: ' Create an account',
+                                  style: TextStyle(
+                                    color: kColorWhite,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ]),
+                        ),
                       ),
                       const YMargin(70),
                       const Text(
