@@ -3,23 +3,21 @@ import 'package:xafe/app/authentication/presentation/screens/signup/signup_scree
 import 'package:xafe/app/authentication/presentation/widgets/sign_up_screen_widget.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
-class SignUpScreen2 extends StatefulWidget {
+class SignUpScreen4 extends StatefulWidget {
   @override
-  _SignUpScreen2State createState() => _SignUpScreen2State();
+  _SignUpScreen4State createState() => _SignUpScreen4State();
 }
 
-class _SignUpScreen2State extends State<SignUpScreen2> {
+class _SignUpScreen4State extends State<SignUpScreen4> {
   @override
   Widget build(BuildContext context) {
     return SignUpScreenWidget(
-      title: 'What’s your email?',
-      hintText: 'Enter your email address',
+      title: 'Add a Password',
+      hintText: 'Enter password',
+      isPasswordScreen: true,
       buttonTitle: 'Next',
       onPressed: () {
-        navigate(
-          context,
-          SignUpScreen3(),
-        );
+
       },
     );
   }
