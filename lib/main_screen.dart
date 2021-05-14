@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:xafe/app/categories/presentation/screens/categories_screen.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
@@ -12,7 +13,12 @@ enum BottomNavigationItem {
   Budget,
 }
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   final ValueNotifier<BottomNavigationItem> _bottomNavigationItem =
       ValueNotifier(BottomNavigationItem.Home);
 
@@ -64,7 +70,11 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: value == BottomNavigationItem.Home ? HomeScreen() : Column(),
+            body: value == BottomNavigationItem.Home
+                ? HomeScreen()
+                : value == BottomNavigationItem.Categories
+                    ? CategoriesScreen()
+                    : Column(),
           );
         });
   }
