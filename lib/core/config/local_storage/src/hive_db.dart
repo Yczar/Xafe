@@ -3,11 +3,9 @@ import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 ///[BOXES].
-const String kBoxOnBoarding = 'onboarding';
 const String kBoxUser = 'user_box';
 
-///[KEYS].
-const String kKeyShouldTutorialShow = 'show_tutorial';
+
 
 Future<void> setupHive() async {
   final appDocumentDirectory =
@@ -17,7 +15,6 @@ Future<void> setupHive() async {
   /* Hive.registerAdapter(UserAccountModelAdapter()); */
 
   ///Open Boxes
-  await Hive.openBox(kBoxOnBoarding);
   await Hive.openBox(kBoxUser);
 }
 
