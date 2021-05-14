@@ -12,15 +12,16 @@ class _SignUpScreen3State extends State<SignUpScreen3> {
   @override
   Widget build(BuildContext context) {
     return SignUpScreenWidget(
-        title: 'Enter the code',
-        hintText: 'Enter the code sent to your email address',
-        buttonTitle: 'Next',
-        keyBoardType: TextInputType.number,
-        onPressed: () {
-          navigate(
-            context,
-            SignUpScreen4(),
-          );
-        });
+      title: 'Enter the code',
+      hintText: 'Enter the code sent to your email address',
+      buttonTitle: 'Next',
+      keyBoardType: TextInputType.number,
+      onPressed: () {
+        navigate(
+          context,
+          SignUpScreen4(),
+        );
+      },
+    );
   }
 }

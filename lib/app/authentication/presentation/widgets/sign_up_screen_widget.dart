@@ -90,7 +90,31 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                     ),
                   ),
                 ),
-                const YMargin(176.95),
+                YMargin(widget.isPasswordScreen ? 38 : 0),
+                widget.isPasswordScreen
+                    ? Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: context.insetsSymetric(
+                            horizontal: 10,
+                            vertical: 6.5,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: kColorAltStroke,
+                          ),
+                          child: const Text(
+                            'show password',
+                            style: TextStyle(
+                              color: kColorAppBlack,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                YMargin(widget.isPasswordScreen ? 107.95 : 176.95),
                 Stack(
                   children: [
                     Container(
