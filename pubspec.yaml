@@ -28,6 +28,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/svgs/main_screen/
+    - assets/svgs/home_screen/
   fonts:
     - family: EuclidaCircular
       fonts:
