@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/app/authentication/presentation/screens/login_screen.dart';
 import 'package:xafe/app/authentication/presentation/screens/signup/signup_screen_1.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/values/colors/colors.dart';
@@ -57,7 +58,10 @@ class SplashScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       XafeButton(
-                        onPressed: () {},
+                        onPressed: () { navigate(
+                          context,
+                          LoginScreen(),
+                        );},
                         text: 'Login',
                       ),
                       const YMargin(70),
