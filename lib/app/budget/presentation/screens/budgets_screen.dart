@@ -3,6 +3,7 @@ import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
+import 'budget_details_screen.dart';
 import 'create_a_budget_screen.dart';
 
 class BudgetsScreen extends StatefulWidget {
@@ -65,57 +66,65 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
                         ),
                       );
                     }
-                    return Container(
-                      padding: context.insetsSymetric(
-                        horizontal: 20,
-                        vertical: 21.25,
-                      ),
-                      decoration: BoxDecoration(
-                        color: kColorWhite,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Groceries',
-                            style: TextStyle(
-                              color: Color(0xFF898A8D),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const Text(
-                            r'$40/month',
-                            style: TextStyle(
-                              color: kColorBlack,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
-                            ),
-                          ),
-                          const YMargin(12),
-                          Stack(
-                            children: [
-                              Container(
-                                height: context.scaleY(11),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF52ACFF).withOpacity(0.12),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
+                    return InkWell(
+                      onTap: () {
+                        navigate(
+                          context,
+                          BudgetDetailsScreen(),
+                        );
+                      },
+                      child: Container(
+                        padding: context.insetsSymetric(
+                          horizontal: 20,
+                          vertical: 21.25,
+                        ),
+                        decoration: BoxDecoration(
+                          color: kColorWhite,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Groceries',
+                              style: TextStyle(
+                                color: Color(0xFF898A8D),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
                               ),
-                              Container(
-                                height: context.scaleY(11),
-                                width: context.scaleY(101),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF52ACFF),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
+                            ),
+                            const Text(
+                              r'$40/month',
+                              style: TextStyle(
+                                color: kColorBlack,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
                               ),
-                            ],
-                          )
-                        ],
+                            ),
+                            const YMargin(12),
+                            Stack(
+                              children: [
+                                Container(
+                                  height: context.scaleY(11),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF52ACFF)
+                                        .withOpacity(0.12),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                                Container(
+                                  height: context.scaleY(11),
+                                  width: context.scaleY(101),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF52ACFF),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
