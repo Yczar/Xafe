@@ -1,6 +1,7 @@
 
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:xafe/app/authentication/authentication_dependencies.dart';
 import 'package:xafe/core/network_checker/network_info.dart';
 
 import 'firebase/services/auth_service.dart';
@@ -22,4 +23,5 @@ void setupLocator() {
 
 
   ///[App]
+  registerAuthenticationDIs();
 }

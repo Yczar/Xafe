@@ -9,5 +9,5 @@ abstract class AuthenticationDataSource {
 
   Future<void> postCreateUser(UserModel params);
 
-  Future<UserModel> postGetUser(String email);
+  Future<UserModel> postGetUser(String id);
 }
