@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stacked/stacked.dart';
+import 'package:xafe/app/home/presentation/logic/viewmodels/home_screen_viewmodel.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
@@ -51,14 +53,23 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: kColorWhite,
-                    radius: context.scaleY(24),
-                    child: SvgPicture.asset(
-                      kPenIcon,
-                      height: context.scaleY(19.97),
-                    ),
-                  ),
+                  ViewModelBuilder<HomeScreenViewModel>.reactive(
+                      viewModelBuilder: () => HomeScreenViewModel(),
+                      builder: (_, model, __) {
+                        return CircleAvatar(
+                          backgroundColor: kColorWhite,
+                          radius: context.scaleY(24),
+                          child: InkWell(
+                            onTap: () {
+                              model.showBottomSheet(context);
+                            },
+                            child: SvgPicture.asset(
+                              kPenIcon,
+                              height: context.scaleY(19.97),
+                            ),
+                          ),
+                        );
+                      }),
                 ],
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:xafe/src/res/res.dart';
+import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class HomeScreenViewModel extends ChangeNotifier {
@@ -10,7 +12,11 @@ class HomeScreenViewModel extends ChangeNotifier {
         backgroundColor: Colors.transparent,
         context: context,
         builder: (BuildContext context) {
-          return Container(
+        return IntrinsicHeight(
+          child: Container(
+            padding: context.insetsSymetric(
+              horizontal: 20,
+            ),
             decoration: const BoxDecoration(
               color: kColorWhite,
               borderRadius: BorderRadius.only(
@@ -20,18 +26,65 @@ class HomeScreenViewModel extends ChangeNotifier {
             ),
             child: Column(
               children: [
+                const YMargin(22.16),
                 Container(
-                  height: context.scaleY(83.99),
-                  width: context.scaleY(70),
+                  width: context.scaleY(50),
+                  height: context.scaleY(5),
                   decoration: BoxDecoration(
-                    color: kColorWhite,
-                    borderRadius: BorderRadius.circular(10),
+                    color: kColorBlackish.withOpacity(0.1),
                   ),
                 ),
-                const YMargin(20),
+                const YMargin(40.66),
+                BottomSheetItem(),
+                Padding(
+                  padding: context.insetsOnly(left: 40.0, top: 25,),
+                  child: const Divider(
+                    height: 0,
+                  ),
+                ),
+                const YMargin(25),
+                BottomSheetItem(),
+                Padding(
+                  padding: context.insetsOnly(left: 40.0, top: 25),
+                  child: const Divider(
+                    height: 0,
+                  ),
+                ),
+                 const YMargin(25),
+                BottomSheetItem(),
+                Padding(
+                  padding: context.insetsOnly(left: 40.0, top: 20),
+                  child: const Divider(
+                    height: 0,
+                  ),
+                ),
+
+                const YMargin(128.62),
               ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
+  }
+}
+
+class BottomSheetItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SvgPicture.asset(kPenIcon),
+        const XMargin(17),
+        const Text(
+          'Add an Expense',
+          style: TextStyle(
+            color: kColorAppBlack,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
+    );
   }
 }
