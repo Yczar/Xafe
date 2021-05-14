@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:digicit_app/app/authentication/domain/params/post_params/post_params.dart';
-import 'package:digicit_app/app/authentication/domain/repositories/authentication_repo.dart';
-import 'package:digicit_app/core/error/failures.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:xafe/app/authentication/domain/params/post_params/post_params.dart';
+import 'package:xafe/app/authentication/domain/repository/authentication_repo.dart';
+import 'package:xafe/core/error/failures.dart';
 
 class RegisterUser {
   RegisterUser(this._repository);
