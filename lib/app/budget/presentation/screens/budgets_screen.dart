@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:xafe/src/res/res.dart';
+import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
+
+import 'create_a_budget_screen.dart';
 
 class BudgetsScreen extends StatefulWidget {
   @override
@@ -42,15 +45,23 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
                   itemCount: 5,
                   itemBuilder: (_, index) {
                     if (index == 4) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: kColorWhite.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Icon(
-                          Icons.add,
-                          size: context.scaleY(18.67),
-                          color: kColorWhite,
+                      return InkWell(
+                        onTap: () {
+                          navigate(
+                            context,
+                            CreateABudgetScreen(),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: kColorWhite.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            size: context.scaleY(18.67),
+                            color: kColorWhite,
+                          ),
                         ),
                       );
                     }
