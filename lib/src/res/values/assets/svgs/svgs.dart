@@ -16,4 +16,4 @@ const String kCategoryIcon = '$_mainScreenSvgDir/category_icon.svg';
  */
 
 ///
-const String kPenIcon = '$_mainScreenSvgDir/pen_icon.svg';
+const String kPenIcon = '$_homeScreenSvgDir/pen_icon.svg';
