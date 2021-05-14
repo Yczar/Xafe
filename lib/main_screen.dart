@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:xafe/src/res/res.dart';
+import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 enum BottomNavigationItem {
@@ -29,7 +31,8 @@ class MainScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BottomItem(
-                      title: 'Homr',
+                      title: 'Home',
+                      svgPath: kHomeIcon,
                       selected: value == BottomNavigationItem.Home,
                       onPressed: () {
                         _bottomNavigationItem.value = BottomNavigationItem.Home;
@@ -38,6 +41,7 @@ class MainScreen extends StatelessWidget {
                     const XMargin(43),
                     BottomItem(
                       title: 'Categories',
+                      svgPath: kCategoryIcon,
                       selected: value == BottomNavigationItem.Categories,
                       onPressed: () {
                         _bottomNavigationItem.value =
@@ -47,6 +51,7 @@ class MainScreen extends StatelessWidget {
                     const XMargin(43),
                     BottomItem(
                       title: 'Budget',
+                      svgPath: kBudgetIcon,
                       selected: value == BottomNavigationItem.Budget,
                       onPressed: () {
                         _bottomNavigationItem.value =
@@ -83,8 +88,10 @@ class BottomItem extends StatelessWidget {
       onTap: onPressed,
       child: Column(
         children: [
-          const Icon(
-            Icons.home,
+          SvgPicture.asset(
+            svgPath,
+            height: context.scaleY(19),
+            color: selected ? kColorAppBlack : kColorAppGrey,
           ),
           Text(
             title,
