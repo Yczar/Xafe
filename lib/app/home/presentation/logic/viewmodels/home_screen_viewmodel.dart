@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:xafe/app/home/presentation/screens/add_an_expense_screen.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
+import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class HomeScreenViewModel extends ChangeNotifier {
@@ -35,9 +37,17 @@ class HomeScreenViewModel extends ChangeNotifier {
                   ),
                 ),
                 const YMargin(40.66),
-                const BottomSheetItem(
-                  svgPath: kAddExpenseIcon,
-                  title: 'Add an Expense',
+                InkWell(
+                  onTap: () {
+                    navigate(
+                      context,
+                      AddAnExpenseScreen(),
+                    );
+                  },
+                  child: const BottomSheetItem(
+                    svgPath: kAddExpenseIcon,
+                    title: 'Add an Expense',
+                  ),
                 ),
                 Padding(
                   padding: context.insetsOnly(
