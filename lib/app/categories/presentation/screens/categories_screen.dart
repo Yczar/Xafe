@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
 import 'package:xafe/src/res/res.dart';
+import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -24,13 +26,21 @@ class CategoriesScreen extends StatelessWidget {
                       color: kColorWhite,
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: kColorWhite.withOpacity(0.12),
-                    radius: context.scaleY(24),
-                    child: Icon(
-                      Icons.add,
-                      size: context.scaleY(21),
-                      color: kColorWhite,
+                  InkWell(
+                    onTap: () {
+                      navigate(
+                        context,
+                        AddSpendingCategoryScreen(),
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: kColorWhite.withOpacity(0.12),
+                      radius: context.scaleY(24),
+                      child: Icon(
+                        Icons.add,
+                        size: context.scaleY(21),
+                        color: kColorWhite,
+                      ),
                     ),
                   ),
                 ],
