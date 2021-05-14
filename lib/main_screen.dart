@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:xafe/app/categories/presentation/screens/categories_screen.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
@@ -64,7 +65,11 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: value == BottomNavigationItem.Home ? HomeScreen() : Column(),
+            body: value == BottomNavigationItem.Home
+                ? HomeScreen()
+                : value == BottomNavigationItem.Categories
+                    ? CategoriesScreen()
+                    : Column(),
           );
         });
   }
