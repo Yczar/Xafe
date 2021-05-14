@@ -4,6 +4,8 @@ import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
+import 'app/home/presentation/screens/home_screen.dart';
+
 enum BottomNavigationItem {
   Home,
   Categories,
@@ -62,7 +64,7 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            body: Column(),
+            body: value == BottomNavigationItem.Home ? HomeScreen() : Column(),
           );
         });
   }
