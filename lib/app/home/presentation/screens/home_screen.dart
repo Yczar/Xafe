@@ -155,6 +155,7 @@ class HomeScreen extends StatelessWidget {
                         color: kColorBlackish.withOpacity(0.1),
                       ),
                     ),
+                    const YMargin(30),
                     Expanded(
                       child: ListView.separated(
                         itemCount: 5,
