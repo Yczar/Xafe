@@ -18,5 +18,5 @@ const String kCategoryIcon = '$_mainScreenSvgDir/category_icon.svg';
 ///
 const String kPenIcon = '$_homeScreenSvgDir/pen_icon.svg';
 const String kAddExpenseIcon = '$_homeScreenSvgDir/add_expense_icon.svg';
-const String CreateBudgetIcon = '$_homeScreenSvgDir/create_budget_icon.svg';
-const String AddSpendingIcon = '$_homeScreenSvgDir/add_spending_category_icon.svg';
+const String kCreateBudgetIcon = '$_homeScreenSvgDir/create_budget_icon.svg';
+const String kAddSpendingIcon = '$_homeScreenSvgDir/add_spending_category_icon.svg';

@@ -35,30 +35,41 @@ class HomeScreenViewModel extends ChangeNotifier {
                   ),
                 ),
                 const YMargin(40.66),
-                BottomSheetItem(),
+                const BottomSheetItem(
+                  svgPath: kAddExpenseIcon,
+                  title: 'Add an Expense',
+                ),
                 Padding(
-                  padding: context.insetsOnly(left: 40.0, top: 25,),
+                  padding: context.insetsOnly(
+                    left: 40.0,
+                    top: 25,
+                  ),
                   child: const Divider(
                     height: 0,
                   ),
                 ),
                 const YMargin(25),
-                BottomSheetItem(),
+                const BottomSheetItem(
+                  title: 'Create a budget',
+                  svgPath: kCreateBudgetIcon,
+                ),
                 Padding(
                   padding: context.insetsOnly(left: 40.0, top: 25),
                   child: const Divider(
                     height: 0,
                   ),
                 ),
-                 const YMargin(25),
-                BottomSheetItem(),
+                const YMargin(25),
+                const BottomSheetItem(
+                  title: 'Add a spending category',
+                  svgPath: kAddSpendingIcon,
+                ),
                 Padding(
                   padding: context.insetsOnly(left: 40.0, top: 20),
                   child: const Divider(
                     height: 0,
                   ),
                 ),
-
                 const YMargin(128.62),
               ],
             ),
@@ -70,15 +81,24 @@ class HomeScreenViewModel extends ChangeNotifier {
 }
 
 class BottomSheetItem extends StatelessWidget {
+  const BottomSheetItem({
+    Key key,
+    this.svgPath,
+    this.title,
+  }) : super(key: key);
+
+  final String svgPath;
+  final String title;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(kPenIcon),
+        SvgPicture.asset(svgPath),
         const XMargin(17),
-        const Text(
-          'Add an Expense',
-          style: TextStyle(
+        Text(
+          title,
+          style: const TextStyle(
             color: kColorAppBlack,
             fontSize: 16,
             fontWeight: FontWeight.w400,
