@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "54856911327",
+    "project_id": "xale-6b80a",
+    "storage_bucket": "xale-6b80a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54856911327:android:2834d37b0e391b2556dc6a",
+        "android_client_info": {
+          "package_name": "com.tradedepot.xafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54856911327-sdhebgnnuv9t7fu0umvrdgithhnlniv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRwqyHc7mmhIXyWrWtBzYbGlD3OD58JMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54856911327-sdhebgnnuv9t7fu0umvrdgithhnlniv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

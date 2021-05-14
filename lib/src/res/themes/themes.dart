@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/src/res/values/styles/form_style.dart';
 
 import '../res.dart';
 
@@ -25,4 +26,5 @@ ThemeData xafeTheme(BuildContext context) => ThemeData(
       scaffoldBackgroundColor: kColorWhite,
       brightness: Brightness.light,
       fontFamily: 'EuclidaCircular',
+      inputDecorationTheme: xafeFormTheme,
     );
