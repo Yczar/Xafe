@@ -13,7 +13,12 @@ enum BottomNavigationItem {
   Budget,
 }
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   final ValueNotifier<BottomNavigationItem> _bottomNavigationItem =
       ValueNotifier(BottomNavigationItem.Home);
 
