@@ -9,4 +9,4 @@ const Color kColorAltStroke = Color(0xFFF8F8F9);
 
 ///Natural [Colors]
 const Color kColorWhite = Color(0xFFFFFFFF);
-const Color kColorBlack = Color(0xFF000000);
+const Color kColorBlack = Color(0xFF0E2838);
