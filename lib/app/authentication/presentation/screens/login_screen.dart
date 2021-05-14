@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'email address',
                 ),
               ),
+              const YMargin(10),
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: '• • • • • • • • • • ',

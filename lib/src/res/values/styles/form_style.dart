@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/src/res/res.dart';
 
 const _borderRadius = BorderRadius.all(
   Radius.circular(16),
@@ -27,6 +28,11 @@ OutlineInputBorder _errorBorderStyle = const OutlineInputBorder(
 InputDecorationTheme _xafeFormTheme = InputDecorationTheme(
   border: _borderStyle,
   enabledBorder: _enableBorderStyle,
+  hintStyle: const TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: kColorBlackish,
+  ),
   focusedBorder: _focusedBorderStyle,
   disabledBorder: _borderStyle,
   filled: true,
