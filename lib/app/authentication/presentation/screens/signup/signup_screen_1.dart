@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xafe/app/authentication/data/models/user_model.dart';
 import 'package:xafe/app/authentication/presentation/screens/signup/signup_screen_2.dart';
 import 'package:xafe/app/authentication/presentation/widgets/sign_up_screen_widget.dart';
+import 'package:xafe/src/res/components/forms/helpers/validator_helper.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
 class SignUpScreen1 extends StatefulWidget {
@@ -30,9 +31,11 @@ class _SignUpScreen1State extends State<SignUpScreen1> {
       title: 'What’s your name?',
       hintText: 'Enter your first name and last name',
       buttonTitle: 'Next',
+      validator: (value) {
+        return XafeFormFieldValidator.defaultValidator(value);
+      },
       controller: _nameEditingController,
       onPressed: () {
-        print('boom');
         navigate(
           context,
           SignUpScreen2(
