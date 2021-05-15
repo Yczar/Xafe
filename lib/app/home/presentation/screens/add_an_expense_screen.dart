@@ -14,10 +14,13 @@ class AddAnExpenseScreen extends StatefulWidget {
 }
 
 class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
+  final ValueNotifier<CategoryModel> _selectedCategory =
+      ValueNotifier(CategoryModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: context.insetsSymetric(
@@ -45,55 +48,72 @@ class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data.isNotEmpty) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Add an expense',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 24,
-                              color: kColorAppBlack,
-                            ),
-                          ),
-                          const YMargin(35),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              hintText: 'expense amount',
-                            ),
-                          ),
-                          const YMargin(10),
-                          DropdownButtonFormField(
-                            iconEnabledColor: kColorAppBlack,
-                            iconDisabledColor: kColorAppBlack,
-                            items: [
-                              const DropdownMenuItem(
-                                child: Text('Hello'),
+                      _selectedCategory.value = snapshot.data[0];
+                      return Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Add an expense',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 24,
+                                color: kColorAppBlack,
                               ),
-                            ],
-                            decoration: const InputDecoration(
-                              hintText: 'Select category',
                             ),
-                          ),
-                          const YMargin(10),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              hintText: 'expense name',
+                            const YMargin(35),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'expense amount',
+                              ),
                             ),
-                          ),
-                          const YMargin(10),
-                          TextFormField(
-                            decoration: const InputDecoration(
-                              hintText: 'date (dd/mm/yy)',
+                            const YMargin(10),
+                            ValueListenableBuilder(
+                                valueListenable: _selectedCategory,
+                                builder: (_, value, child) {
+                                  return DropdownButtonFormField(
+                                    iconEnabledColor: kColorAppBlack,
+                                    iconDisabledColor: kColorAppBlack,
+                                    value: value,
+                                    onChanged: (value) {
+                                      _selectedCategory.value = value;
+                                    },
+                                    items: snapshot.data
+                                        .map(
+                                          (category) => DropdownMenuItem(
+                                            child: Text(
+                                              // ignore: lines_longer_than_80_chars
+                                              '${category.categoryEmoji} ${category.categoryName}',
+                                            ),
+                                            value: category,
+                                          ),
+                                        )
+                                        .toList(),
+                                    decoration: const InputDecoration(
+                                      hintText: 'Select category',
+                                    ),
+                                  );
+                                }),
+                            const YMargin(10),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'expense name',
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          XafeButton(
-                            onPressed: () {},
-                            text: 'Create Category',
-                          ),
-                          const YMargin(80),
-                        ],
+                            const YMargin(10),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'date (dd/mm/yy)',
+                              ),
+                            ),
+                            const Spacer(),
+                            XafeButton(
+                              onPressed: () {},
+                              text: 'Create Category',
+                            ),
+                            const YMargin(80),
+                          ],
+                        ),
                       );
                     } else {
                       return const Expanded(
