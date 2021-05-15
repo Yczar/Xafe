@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:stacked/stacked.dart';
 import 'package:xafe/app/categories/data/model/category_model.dart';
 import 'package:xafe/app/categories/domain/usecases/listen_to_categories.dart';
+import 'package:xafe/app/categories/presentation/logic/viewmodels/delete_category_viewmodel.dart';
 import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
 import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/res.dart';
@@ -165,29 +167,51 @@ class CategoriesScreen extends StatelessWidget {
                                                   ],
                                                 ),
                                                 const Spacer(),
-                                                Container(
-                                                  padding:
-                                                  context.insetsSymetric(
-                                                    horizontal: 10,
-                                                    vertical: 5,
+                                                ViewModelBuilder<
+                                                    // ignore: lines_longer_than_80_chars
+                                                    DeleteCategoryViewmodel>.reactive(
+                                                  viewModelBuilder: () =>
+                                                      DeleteCategoryViewmodel(
+                                                    locator(),
                                                   ),
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        const Color(0xFFFF8514)
-                                                            .withOpacity(0.12),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
-                                                  ),
-                                                  child: const Text(
-                                                    'remove',
-                                                    style: TextStyle(
-                                                      color: Color(0xFFFF8514),
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                  ),
+                                                  builder: (_, model, __) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        model.deleteCategory(
+                                                          categoryId: snapshot
+                                                              .data[index]
+                                                              .categoryId,
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding: context
+                                                            .insetsSymetric(
+                                                          horizontal: 10,
+                                                          vertical: 5,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                                  0xFFFF8514)
+                                                              .withOpacity(
+                                                                  0.12),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                        ),
+                                                        child: const Text(
+                                                          'remove',
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFFFF8514),
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                 ),
                                               ],
                                             ),
