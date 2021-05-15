@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:xafe/src/res/components/back_arrow/src/app_back_arrow.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
-import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class CreateABudgetScreen extends StatefulWidget {
@@ -23,16 +23,7 @@ class _CreateABudgetScreenState extends State<CreateABudgetScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const YMargin(66.45),
-              InkWell(
-                onTap: () {
-                  popView(context);
-                },
-                child: Icon(
-                  Icons.chevron_left,
-                  color: kColorBlackish,
-                  size: context.scaleY(19),
-                ),
-              ),
+              KAppBackArrow(),
               const YMargin(60.45),
               const Text(
                 'Create a budget',

@@ -4,9 +4,9 @@ import 'package:uuid/uuid.dart';
 import 'package:xafe/app/categories/data/model/category_model.dart';
 import 'package:xafe/app/categories/presentation/logic/viewmodels/create_category_viewmodel.dart';
 import 'package:xafe/core/config/di_config.dart';
+import 'package:xafe/src/res/components/back_arrow/src/app_back_arrow.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
-import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class AddSpendingCategoryScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _AddSpendingCategoryScreenState extends State<AddSpendingCategoryScreen> {
     '🏡',
     '🎥',
   ];
-  ValueNotifier<String> _currentSelectedValue = ValueNotifier('✈️');
+  final ValueNotifier<String> _currentSelectedValue = ValueNotifier(null);
   TextEditingController _categoryNameController;
   TextEditingController _categoryEmojiController;
 
@@ -52,16 +52,7 @@ class _AddSpendingCategoryScreenState extends State<AddSpendingCategoryScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const YMargin(66.45),
-            InkWell(
-              onTap: (){
-                popView(context);
-              },
-              child: Icon(
-                Icons.chevron_left,
-                color: kColorBlackish,
-                size: context.scaleY(19),
-              ),
-            ),
+            KAppBackArrow(),
             const YMargin(60.45),
             const Text(
               '‍Add a spending category',
