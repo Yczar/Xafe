@@ -235,18 +235,14 @@ class HomeScreen extends StatelessWidget {
                           );
                         }
                       } else if (snapshot.hasError) {
-                        return Expanded(
-                          child: Center(
-                            child: Text(
-                              'Error: ${snapshot.error}',
-                            ),
+                        return Center(
+                          child: Text(
+                            'Error: ${snapshot.error}',
                           ),
                         );
                       } else {
-                        return const Expanded(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                        return const Center(
+                          child: CircularProgressIndicator(),
                         );
                       }
                     }),
