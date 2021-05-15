@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:xafe/app/categories/data/model/category_model.dart';
 import 'package:xafe/app/categories/domain/usecases/listen_to_categories.dart';
 import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
@@ -141,9 +142,20 @@ class CategoriesScreen extends StatelessWidget {
                                                             FontWeight.w400,
                                                       ),
                                                     ),
-                                                    const Text(
-                                                      '03/12/20',
-                                                      style: TextStyle(
+                                                    Text(
+                                                      DateFormat('dd/MM/yy')
+                                                          .format(
+                                                        DateTime
+                                                            // ignore: lines_longer_than_80_chars
+                                                            .fromMicrosecondsSinceEpoch(
+                                                          snapshot
+                                                              .data[index]
+                                                              .categoryTimestamp
+                                                              // ignore: lines_longer_than_80_chars
+                                                              .microsecondsSinceEpoch,
+                                                        ),
+                                                      ),
+                                                      style: const TextStyle(
                                                         color: kColorAppGrey,
                                                         fontSize: 14,
                                                         fontWeight:
