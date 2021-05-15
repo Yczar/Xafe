@@ -92,12 +92,14 @@ class CategoriesScreen extends StatelessWidget {
                             } else {
                               return Expanded(
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: context.insetsOnly(left: 20.0),
-                                      child: const Text(
-                                        '4 spending categories',
-                                        style: TextStyle(
+                                      child: Text(
+                                        // ignore: lines_longer_than_80_chars
+                                        '${snapshot.data.length} spending categories',
+                                        style: const TextStyle(
                                           color: kColorAppBlack,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -114,10 +116,12 @@ class CategoriesScreen extends StatelessWidget {
                                             ),
                                             child: Row(
                                               children: [
-                                                Image.network(
-                                                  '',
-                                                  width: context.scaleY(36),
-                                                  height: context.scaleY(36),
+                                                Text(
+                                                  snapshot.data[index]
+                                                      .categoryEmoji,
+                                                  style: const TextStyle(
+                                                    fontSize: 36,
+                                                  ),
                                                 ),
                                                 const XMargin(12.68),
                                                 Column(
@@ -126,9 +130,11 @@ class CategoriesScreen extends StatelessWidget {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
-                                                    const Text(
-                                                      'Food',
-                                                      style: TextStyle(
+                                                    Text(
+                                                      // ignore: lines_longer_than_80_chars
+                                                      snapshot.data[index]
+                                                          .categoryName,
+                                                      style: const TextStyle(
                                                         color: kColorAppBlack,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -149,7 +155,7 @@ class CategoriesScreen extends StatelessWidget {
                                                 const Spacer(),
                                                 Container(
                                                   padding:
-                                                      context.insetsSymetric(
+                                                  context.insetsSymetric(
                                                     horizontal: 10,
                                                     vertical: 5,
                                                   ),
@@ -180,7 +186,7 @@ class CategoriesScreen extends StatelessWidget {
                                           color: const Color(0xFF9A96A4)
                                               .withOpacity(0.1),
                                         ),
-                                        itemCount: 5,
+                                        itemCount: snapshot.data.length,
                                       ),
                                     ),
                                   ],

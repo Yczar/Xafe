@@ -11,7 +11,7 @@ class CreateCategoryViewmodel extends BaseViewModel {
 
   final CreateCategory _createCategory;
 
-  Future loginUser({
+  Future createCategory({
     CategoryModel params,
     BuildContext context,
   }) {
