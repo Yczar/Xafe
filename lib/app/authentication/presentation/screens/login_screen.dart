@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:xafe/app/authentication/domain/params/post_params/post_params.dart';
+import 'package:xafe/app/authentication/presentation/logic/viewmodels/login_viewmodel.dart';
+import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
@@ -10,6 +14,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailEditingController;
+  TextEditingController _passwordEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailEditingController = TextEditingController(
+      text: '',
+    );
+    _passwordEditingController = TextEditingController(
+      text: '',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,12 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const YMargin(13),
               TextFormField(
+                controller: _emailEditingController,
                 decoration: const InputDecoration(
                   hintText: 'email address',
                 ),
               ),
               const YMargin(10),
               TextFormField(
+                controller: _passwordEditingController,
                 decoration: const InputDecoration(
                   hintText: '• • • • • • • • • • ',
                 ),
@@ -85,9 +105,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const Spacer(),
-              XafeButton(
-                text: 'Login', onPressed: () {  },
-              ),
+              ViewModelBuilder<LoginViewmodel>.reactive(
+                  viewModelBuilder: () => LoginViewmodel(
+                        locator(),
+                      ),
+                  builder: (_, model, __) {
+                    return XafeButton(
+                      text: 'Login',
+                      isLoading: model.isBusy,
+                      onPressed: () {
+                        model.loginUser(
+                          context: context,
+                          params: EmailPasswordParams(
+                            password: _passwordEditingController.text,
+                            email: _emailEditingController.text,
+                          ),
+                        );
+                      },
+                    );
+                  }),
               const YMargin(80),
             ],
           ),

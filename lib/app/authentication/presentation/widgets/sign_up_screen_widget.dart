@@ -14,7 +14,7 @@ class SignUpScreenWidget extends StatefulWidget {
     this.onPressed,
     this.keyBoardType,
     this.controller,
-    this.isBusy,
+    this.isBusy = false,
   }) : super(key: key);
 
   final String title;
@@ -85,6 +85,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
+                    filled: false,
                     isDense: true,
                     contentPadding: context.insetsAll(0),
                     hintText: widget.hintText,

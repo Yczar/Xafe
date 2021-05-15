@@ -48,6 +48,7 @@ class _SignUpScreen4State extends State<SignUpScreen4> {
             isPasswordScreen: true,
             controller: _passwordEditingController,
             buttonTitle: 'Next',
+            isBusy: model.isBusy,
             onPressed: () {
               model.registerUser(
                 context: context,
