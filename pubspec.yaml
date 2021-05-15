@@ -28,6 +28,7 @@ dependencies:
   mailer: ^5.0.0
   uuid: ^3.0.4
   intl: ^0.17.0
+  fluttertoast: ^8.0.6
 
 dev_dependencies:
   flutter_test:
@@ -36,8 +37,10 @@ flutter:
 
   uses-material-design: true
   assets:
+    - assets/svgs/
     - assets/svgs/main_screen/
     - assets/svgs/home_screen/
+    - assets/svgs/authentication/
   fonts:
     - family: EuclidaCircular
       fonts:

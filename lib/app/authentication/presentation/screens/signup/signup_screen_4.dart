@@ -19,6 +19,7 @@ class SignUpScreen4 extends StatefulWidget {
 
 class _SignUpScreen4State extends State<SignUpScreen4> {
   TextEditingController _passwordEditingController;
+  final ValueNotifier<bool> _isObscure = ValueNotifier(true);
 
   @override
   void initState() {
@@ -42,24 +43,33 @@ class _SignUpScreen4State extends State<SignUpScreen4> {
               locator(),
             ),
         builder: (_, model, __) {
-          return SignUpScreenWidget(
-            title: 'Add a Password',
-            hintText: 'Enter password',
-            isPasswordScreen: true,
-            controller: _passwordEditingController,
-            buttonTitle: 'Next',
-            isBusy: model.isBusy,
-            onPressed: () {
-              model.registerUser(
-                context: context,
-                emailPasswordParams: EmailPasswordParams(
-                  email: widget.userModel.email,
-                  password: _passwordEditingController.text,
-                ),
-                params: widget.userModel,
-              );
-            },
-          );
+          return ValueListenableBuilder(
+              valueListenable: _isObscure,
+              builder: (_, value, __) {
+                return SignUpScreenWidget(
+                  title: 'Add a Password',
+                  hintText: 'Enter password',
+                  isPasswordScreen: true,
+                  showPasswordText: value ? 'show password' : 'hide password',
+                  obscureText: value,
+                  controller: _passwordEditingController,
+                  buttonTitle: 'Next',
+                  isBusy: model.isBusy,
+                  onShowPasswordPressed: () {
+                    _isObscure.value = !_isObscure.value;
+                  },
+                  onPressed: () {
+                    model.registerUser(
+                      context: context,
+                      emailPasswordParams: EmailPasswordParams(
+                        email: widget.userModel.email,
+                        password: _passwordEditingController.text,
+                      ),
+                      params: widget.userModel,
+                    );
+                  },
+                );
+              });
         });
   }
 }

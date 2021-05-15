@@ -7,9 +7,9 @@ import 'package:xafe/app/categories/domain/usecases/listen_to_categories.dart';
 import 'package:xafe/app/home/data/models/expense_model.dart';
 import 'package:xafe/app/home/presentation/logic/viewmodels/add_an_expense_viewmodel.dart';
 import 'package:xafe/core/config/di_config.dart';
+import 'package:xafe/src/res/components/back_arrow/src/app_back_arrow.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
-import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
 class AddAnExpenseScreen extends StatefulWidget {
@@ -43,16 +43,7 @@ class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const YMargin(66.45),
-              InkWell(
-                onTap: () {
-                  popView(context);
-                },
-                child: Icon(
-                  Icons.chevron_left,
-                  color: kColorBlackish,
-                  size: context.scaleY(19),
-                ),
-              ),
+              KAppBackArrow(),
               const YMargin(60.45),
               StreamBuilder<List<CategoryModel>>(
                 stream: locator<ListenToCategories>().call(

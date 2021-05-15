@@ -2,7 +2,14 @@
 const String _svgDir = 'assets/svgs';
 const String _mainScreenSvgDir = '$_svgDir/main_screen';
 const String _homeScreenSvgDir = '$_svgDir/home_screen';
+const String _authenticationSvgDir = '$_svgDir/authentication';
 
+/**
+ * [App's svgs]
+ */
+
+///
+const String kBackArrowIcon = '$_svgDir/app_back_arrow.svg';
 /**
  * [MainScreen svg's]
  */
@@ -19,4 +26,13 @@ const String kCategoryIcon = '$_mainScreenSvgDir/category_icon.svg';
 const String kPenIcon = '$_homeScreenSvgDir/pen_icon.svg';
 const String kAddExpenseIcon = '$_homeScreenSvgDir/add_expense_icon.svg';
 const String kCreateBudgetIcon = '$_homeScreenSvgDir/create_budget_icon.svg';
-const String kAddSpendingIcon = '$_homeScreenSvgDir/add_spending_category_icon.svg';
+const String kAddSpendingIcon =
+    '$_homeScreenSvgDir/add_spending_category_icon.svg';
+
+/**
+ * [Authentication svg's]
+ */
+
+///
+const String kPasswordVisibilityIcon =
+    '$_authenticationSvgDir/password_visibility.svg';

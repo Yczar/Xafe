@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xafe/app/authentication/domain/params/post_params/post_params.dart';
 import 'package:xafe/app/authentication/domain/usecases/login_user.dart';
+import 'package:xafe/core/error/helpers/helpers.dart';
 import 'package:xafe/main_screen.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
@@ -21,13 +23,21 @@ class LoginViewmodel extends BaseViewModel {
       ..then(
         (result) {
           result.fold(
-            (failure) {},
+            (failure) {
+              setBusy(false);
+              Fluttertoast.showToast(
+                msg: mapFailureMessage(failure),
+              );
+            },
             (data) {
+              setBusy(false);
               return pushAndRemoveUntil(
                 context,
                 MainScreen(),
               );
             },
+          ).then(
+            (value) => setBusy(false),
           );
         },
       );
