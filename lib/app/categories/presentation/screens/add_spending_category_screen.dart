@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
@@ -55,15 +56,24 @@ class _AddSpendingCategoryScreenState extends State<AddSpendingCategoryScreen> {
                 const DropdownMenuItem(
                   child: Text('Hello'),
                 ),
+                  const DropdownMenuItem(
+                  child: Text('Hallo'),
+                ),
+
               ],
               decoration: const InputDecoration(
                 hintText: 'Choose category emoji',
               ),
             ),
             const Spacer(),
-            XafeButton(
-              onPressed: () {},
-              text: 'Create Category',
+            ViewModelBuilder.reactive(
+              viewModelBuilder: ()=>null,
+              builder: (_, model, __) {
+                return XafeButton(
+                  onPressed: () {},
+                  text: 'Create Category',
+                );
+              }
             ),
             const YMargin(80),
           ],
