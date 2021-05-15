@@ -14,11 +14,13 @@ class SignUpScreenWidget extends StatefulWidget {
     this.onPressed,
     this.keyBoardType,
     this.controller,
+    this.isBusy,
   }) : super(key: key);
 
   final String title;
   final String hintText;
   final String buttonTitle;
+  final bool isBusy;
   final bool isPasswordScreen;
   final TextEditingController controller;
   final TextInputType keyBoardType;
@@ -145,6 +147,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                 XafeButton(
                   text: widget.buttonTitle,
                   onPressed: widget.onPressed,
+                  isLoading: widget.isBusy,
                 ),
               ],
             ),
