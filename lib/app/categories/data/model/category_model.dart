@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class CategoryModel {
+class CategoryModel extends Equatable {
   CategoryModel({
     this.categoryName,
     this.categoryEmoji,
@@ -26,4 +27,12 @@ class CategoryModel {
       'category_timestamp': DateTime.now()
     };
   }
+
+  @override
+  List<Object> get props => [
+        categoryName,
+        categoryEmoji,
+        categoryId,
+        categoryTimestamp,
+      ];
 }

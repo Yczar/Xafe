@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stacked/stacked.dart';
+import 'package:xafe/app/home/data/models/expense_model.dart';
+import 'package:xafe/app/home/domain/usecases/listen_to_expenses.dart';
 import 'package:xafe/app/home/presentation/logic/viewmodels/home_screen_viewmodel.dart';
+import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
@@ -162,57 +165,91 @@ class HomeScreen extends StatelessWidget {
                     topLeft: Radius.circular(30),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    const YMargin(26.07),
-                    Container(
-                      width: context.scaleY(50),
-                      height: context.scaleY(5),
-                      decoration: BoxDecoration(
-                        color: kColorBlackish.withOpacity(0.1),
-                      ),
-                    ),
-                    const YMargin(30),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: 5,
-                        separatorBuilder: (_, __) => Divider(
-                          height: 0,
-                          color: const Color(0xFF9A96A4).withOpacity(0.1),
-                        ),
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: context.insetsSymetric(
-                              vertical: 28.0,
-                              horizontal: 20.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  '📄 Bill Payments',
-                                  style: TextStyle(
-                                    color: kColorAppBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                child: StreamBuilder<List<ExpenseModel>>(
+                    stream: locator<ListenToExpenses>().call(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data.isNotEmpty) {
+                          return Column(
+                            children: [
+                              const YMargin(26.07),
+                              Container(
+                                width: context.scaleY(50),
+                                height: context.scaleY(5),
+                                decoration: BoxDecoration(
+                                  color: kColorBlackish.withOpacity(0.1),
                                 ),
-                                const Text(
-                                  r'$500.00',
-                                  style: TextStyle(
-                                    color: kColorAppBlack,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                              ),
+                              const YMargin(30),
+                              Expanded(
+                                child: ListView.separated(
+                                  itemCount: snapshot.data.length,
+                                  separatorBuilder: (_, __) => Divider(
+                                    height: 0,
+                                    color: const Color(0xFF9A96A4)
+                                        .withOpacity(0.1),
                                   ),
+                                  itemBuilder: (_, index) {
+                                    return Padding(
+                                      padding: context.insetsSymetric(
+                                        vertical: 28.0,
+                                        horizontal: 20.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            // ignore: lines_longer_than_80_chars
+                                            '${snapshot.data[index].categoryEmoji} ${snapshot.data[index].expenseName}',
+                                            style: const TextStyle(
+                                              color: kColorAppBlack,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Text(
+                                            // ignore: lines_longer_than_80_chars
+                                            '\$${snapshot.data[index].expenseAmount}.00',
+                                            style: const TextStyle(
+                                              color: kColorAppBlack,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
-                              ],
+                              ),
+                            ],
+                          );
+                        } else {
+                          return const Expanded(
+                            child: Center(
+                              child: Text(
+                                'No spending categories added yet',
+                              ),
                             ),
                           );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                        }
+                      } else if (snapshot.hasError) {
+                        return Expanded(
+                          child: Center(
+                            child: Text(
+                              'Error: ${snapshot.error}',
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                    }),
               ),
             ),
           ],
