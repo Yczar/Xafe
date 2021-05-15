@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:stacked/stacked.dart';
+import 'package:xafe/app/authentication/data/models/user_model.dart';
+import 'package:xafe/app/authentication/presentation/screens/signup/signup_screen_3.dart';
+import 'package:xafe/src/utils/navigation/navigation.dart';
 
 class SendEmailViewModel extends BaseViewModel {
   String userEmail = 'babalolagbogo@gmail.com';
@@ -12,7 +16,8 @@ class SendEmailViewModel extends BaseViewModel {
   var randomizer = Random();
 
   Future<void> sendEmail({
-    String email,
+    UserModel userModel,
+    BuildContext context,
   }) async {
     setBusy(true);
     final rNum = min + randomizer.nextInt(max - min);
@@ -25,13 +30,19 @@ class SendEmailViewModel extends BaseViewModel {
     // Create our message.
     final message = Message()
       ..from = Address(userEmail, 'Czar From Xafe')
-      ..recipients.add(email)
+      ..recipients.add(userModel.email)
       ..subject = 'Here is your Xafe code ${DateTime.now()}'
       ..text = 'Your code is $rNum';
 
     try {
       final sendReport = await send(message, smtpServer);
       print('Message sent: ' + sendReport.toString());
+      navigate(
+        context,
+        SignUpScreen3(
+          userModel: userModel,
+        ),
+      );
     } on MailerException catch (e) {
       print('Message not sent.');
       for (var p in e.problems) {
