@@ -7,8 +7,8 @@ import 'package:xafe/app/authentication/domain/usecases/register_user.dart';
 import 'package:xafe/main_screen.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
-class LoginViewmodel extends BaseViewModel {
-  LoginViewmodel(
+class SignUpViewmodel extends BaseViewModel {
+  SignUpViewmodel(
     this._registerUser,
     this._createUser,
   );

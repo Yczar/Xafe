@@ -26,7 +26,9 @@ class _SignUpScreen3State extends State<SignUpScreen3> {
       onPressed: () {
         navigate(
           context,
-          SignUpScreen4(),
+          SignUpScreen4(
+            userModel: widget.userModel,
+          ),
         );
       },
     );
