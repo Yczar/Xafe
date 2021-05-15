@@ -8,4 +8,6 @@ abstract class CategoriesRepo {
   });
 
   Future<Either<Failure, void>> createCategory(CategoryModel params);
+
+  Future<Either<Failure, void>> deleteCategory(String categoryId);
 }
