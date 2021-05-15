@@ -33,14 +33,19 @@ class XafeButton extends StatelessWidget {
           color: kColorBlue,
         ),
         child: Center(
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: kColorWhite,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-            ),
-          ),
+          child: isLoading
+              ? const CircularProgressIndicator(
+                  strokeWidth: 1,
+                  valueColor: AlwaysStoppedAnimation<Color>(kColorWhite),
+                )
+              : Text(
+                  text,
+                  style: const TextStyle(
+                    color: kColorWhite,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
         ),
       ),
     );

@@ -13,12 +13,16 @@ class SignUpScreenWidget extends StatefulWidget {
     this.hintText,
     this.onPressed,
     this.keyBoardType,
+    this.controller,
+    this.isBusy = false,
   }) : super(key: key);
 
   final String title;
   final String hintText;
   final String buttonTitle;
+  final bool isBusy;
   final bool isPasswordScreen;
+  final TextEditingController controller;
   final TextInputType keyBoardType;
   final VoidCallback onPressed;
 
@@ -76,10 +80,12 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                 const YMargin(12),
                 TextFormField(
                   keyboardType: widget.keyBoardType,
+                  controller: widget.controller,
                   decoration: InputDecoration(
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     focusedBorder: InputBorder.none,
+                    filled: false,
                     isDense: true,
                     contentPadding: context.insetsAll(0),
                     hintText: widget.hintText,
@@ -142,6 +148,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                 XafeButton(
                   text: widget.buttonTitle,
                   onPressed: widget.onPressed,
+                  isLoading: widget.isBusy,
                 ),
               ],
             ),
