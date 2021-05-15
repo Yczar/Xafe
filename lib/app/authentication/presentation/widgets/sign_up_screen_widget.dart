@@ -13,12 +13,14 @@ class SignUpScreenWidget extends StatefulWidget {
     this.hintText,
     this.onPressed,
     this.keyBoardType,
+    this.controller,
   }) : super(key: key);
 
   final String title;
   final String hintText;
   final String buttonTitle;
   final bool isPasswordScreen;
+  final TextEditingController controller;
   final TextInputType keyBoardType;
   final VoidCallback onPressed;
 
@@ -76,6 +78,7 @@ class _SignUpScreenWidgetState extends State<SignUpScreenWidget> {
                 const YMargin(12),
                 TextFormField(
                   keyboardType: widget.keyBoardType,
+                  controller: widget.controller,
                   decoration: InputDecoration(
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,

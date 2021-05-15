@@ -9,12 +9,27 @@ class SignUpScreen1 extends StatefulWidget {
 }
 
 class _SignUpScreen1State extends State<SignUpScreen1> {
+  TextEditingController _nameEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameEditingController = TextEditingController(text: '');
+  }
+
+  @override
+  void dispose() {
+    _nameEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SignUpScreenWidget(
       title: 'What’s your name?',
       hintText: 'Enter your first name and last name',
       buttonTitle: 'Next',
+      controller: _nameEditingController,
       onPressed: () {
         navigate(
           context,
