@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
+import 'package:xafe/app/categories/data/model/category_model.dart';
+import 'package:xafe/core/error/failures.dart';
+
 abstract class CategoriesRepo {
-  Future<Either<Failure, User>> loginUser(EmailPasswordParams params);
+  Stream<List<CategoryModel>> listenToCategories({
+    String uid,
+  });
 
-  Future<Either<Failure, User>> registerUser(EmailPasswordParams params);
-
-  Future<Either<Failure, void>> createUser(UserModel params);
-
-  Future<Either<Failure, UserModel>> getUser(String id);
+  Future<Either<Failure, void>> createCategory(CategoryModel params);
 }
