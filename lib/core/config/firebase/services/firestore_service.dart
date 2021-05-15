@@ -260,8 +260,22 @@ Future<QuerySnapshot> whereQueryTwiceCollection({
     String docId,
   }) async {
     return await firebaseInterceptor(
+      () =>
+          xafeCollectionRef(collectionPath: collectionName).doc(docId).delete(),
+    );
+  }
+
+  Future<void> deleteInnerDocument({
+    String collectionName,
+    String innerCollectionName,
+    String docId,
+    String innerDocId,
+  }) async {
+    return await firebaseInterceptor(
       () => xafeCollectionRef(collectionPath: collectionName)
           .doc(docId)
+          .collection(innerCollectionName)
+          .doc(innerDocId)
           .delete(),
     );
   }

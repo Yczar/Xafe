@@ -39,4 +39,15 @@ class CategoriesDataSourceImpl extends CategoriesDataSource {
               .toList(),
         );
   }
+
+  @override
+  Future<void> deleteCategory(String categoryId) {
+    final response = xafeFireStoreService.deleteInnerDocument(
+      docId: FirebaseAuth.instance.currentUser.uid,
+      collectionName: 'users',
+      innerCollectionName: 'categories',
+      innerDocId: categoryId,
+    );
+    return response;
+  }
 }
