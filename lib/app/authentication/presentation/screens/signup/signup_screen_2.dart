@@ -40,13 +40,28 @@ class _SignUpScreen2State extends State<SignUpScreen2> {
       builder: (_, model, __) {
         return SignUpScreenWidget(
           title: 'What’s your email?',
-          hintText: 'Enter your email address',
-          buttonTitle: 'Next',
-          controller: _emailEditingController,
-          onPressed: () {
-           model.sendEmail()
-          },
-        );
+            hintText: 'Enter your email address',
+            buttonTitle: 'Next',
+            controller: _emailEditingController,
+            onPressed: () {
+              // model.sendEmail(
+              //      context: context,
+              //      userModel: UserModel(
+              //        name: widget.userModel.name,
+              //        email: _emailEditingController.text,
+              //      ),
+              //    );
+              navigate(
+                context,
+                SignUpScreen3(
+                  userModel: UserModel(
+                    name: widget.userModel.name,
+                    email: _emailEditingController.text,
+                  ),
+                ),
+              );
+            },
+          );
       }
     );
   }

@@ -12,7 +12,7 @@ class SendEmailViewModel extends BaseViewModel {
   String userEmail = 'babalolagbogo@gmail.com';
   String password = '#31#Viral';
   int min = 100000;
-  int max = 100000;
+  int max = 999999;
   var randomizer = Random();
 
   Future<void> sendEmail({
@@ -22,6 +22,7 @@ class SendEmailViewModel extends BaseViewModel {
     setBusy(true);
     final rNum = min + randomizer.nextInt(max - min);
     final smtpServer = gmail(userEmail, password);
+
     // Use the SmtpServer class to configure an SMTP server:
     // final smtpServer = SmtpServer('smtp.domain.com');
     // See the named arguments of SmtpServer for further configuration
@@ -44,7 +45,7 @@ class SendEmailViewModel extends BaseViewModel {
         ),
       );
     } on MailerException catch (e) {
-      print('Message not sent.');
+      print('Message not sent. $e');
       for (var p in e.problems) {
         print('Problem: ${p.code}: ${p.msg}');
       }

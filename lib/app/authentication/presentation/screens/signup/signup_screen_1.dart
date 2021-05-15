@@ -32,6 +32,7 @@ class _SignUpScreen1State extends State<SignUpScreen1> {
       buttonTitle: 'Next',
       controller: _nameEditingController,
       onPressed: () {
+        print('boom');
         navigate(
           context,
           SignUpScreen2(
