@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
 import 'package:xafe/app/authentication/data/models/user_model.dart';
 import 'package:xafe/app/authentication/domain/params/post_params/post_params.dart';
 import 'package:xafe/app/authentication/domain/usecases/create_user.dart';
 import 'package:xafe/app/authentication/domain/usecases/register_user.dart';
+import 'package:xafe/core/error/helpers/helpers.dart';
 import 'package:xafe/main_screen.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
@@ -26,8 +28,14 @@ class SignUpViewmodel extends BaseViewModel {
       ..then(
         (result) {
           result.fold(
-            (failure) {},
+            (failure) {
+              setBusy(false);
+              Fluttertoast.showToast(
+                msg: mapFailureMessage(failure),
+              );
+            },
             (data) {
+              setBusy(false);
               return createUser(
                 params: UserModel(
                   name: params.name,
