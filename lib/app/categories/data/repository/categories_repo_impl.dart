@@ -22,4 +22,10 @@ class CategoriesRepoImpl implements CategoriesRepo {
     return _categoriesDataSource.listenToCategories(uid);
   }
 
+  @override
+  Future<Either<Failure, void>> deleteCategory(String categoryId) {
+    return successFailureInterceptor(
+      () => _categoriesDataSource.deleteCategory(categoryId),
+    );
+  }
 }
