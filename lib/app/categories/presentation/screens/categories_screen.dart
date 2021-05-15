@@ -1,5 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:stacked/stacked.dart';
+import 'package:xafe/app/categories/data/model/category_model.dart';
+import 'package:xafe/app/categories/domain/usecases/listen_to_categories.dart';
+import 'package:xafe/app/categories/presentation/logic/viewmodels/delete_category_viewmodel.dart';
 import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
+import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
@@ -70,88 +77,174 @@ class CategoriesScreen extends StatelessWidget {
                       ),
                     ),
                     const YMargin(39.63),
-                    Padding(
-                      padding: context.insetsOnly(left: 20.0),
-                      child: const Text(
-                        '4 spending categories',
-                        style: TextStyle(
-                          color: kColorAppBlack,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
                     const YMargin(8.12),
-                    Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (_, index) {
-                          return Padding(
-                            padding: context.insetsSymetric(
-                              vertical: 20.0,
-                              horizontal: 21.48,
-                            ),
-                            child: Row(
-                              children: [
-                                Image.network(
-                                  '',
-                                  width: context.scaleY(36),
-                                  height: context.scaleY(36),
+                    StreamBuilder<List<CategoryModel>>(
+                        stream: locator<ListenToCategories>().call(
+                          uid: FirebaseAuth.instance.currentUser.uid,
+                        ),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            if (snapshot.data.isEmpty) {
+                              return const Expanded(
+                                child: Center(
+                                  child: Text(
+                                    'No spending categories added yet',
+                                  ),
                                 ),
-                                const XMargin(12.68),
-                                Column(
+                              );
+                            } else {
+                              return Expanded(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'Food',
-                                      style: TextStyle(
-                                        color: kColorAppBlack,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                    Padding(
+                                      padding: context.insetsOnly(left: 20.0),
+                                      child: Text(
+                                        // ignore: lines_longer_than_80_chars
+                                        '${snapshot.data.length} spending categories',
+                                        style: const TextStyle(
+                                          color: kColorAppBlack,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
                                     ),
-                                    const Text(
-                                      '03/12/20',
-                                      style: TextStyle(
-                                        color: kColorAppGrey,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
+                                    Expanded(
+                                      child: ListView.separated(
+                                        itemBuilder: (_, index) {
+                                          return Padding(
+                                            padding: context.insetsSymetric(
+                                              vertical: 20.0,
+                                              horizontal: 21.48,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  snapshot.data[index]
+                                                      .categoryEmoji,
+                                                  style: const TextStyle(
+                                                    fontSize: 36,
+                                                  ),
+                                                ),
+                                                const XMargin(12.68),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      // ignore: lines_longer_than_80_chars
+                                                      snapshot.data[index]
+                                                          .categoryName,
+                                                      style: const TextStyle(
+                                                        color: kColorAppBlack,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      DateFormat('dd/MM/yy')
+                                                          .format(
+                                                        DateTime
+                                                            // ignore: lines_longer_than_80_chars
+                                                            .fromMicrosecondsSinceEpoch(
+                                                          snapshot
+                                                              .data[index]
+                                                              .categoryTimestamp
+                                                              // ignore: lines_longer_than_80_chars
+                                                              .microsecondsSinceEpoch,
+                                                        ),
+                                                      ),
+                                                      style: const TextStyle(
+                                                        color: kColorAppGrey,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const Spacer(),
+                                                ViewModelBuilder<
+                                                    // ignore: lines_longer_than_80_chars
+                                                    DeleteCategoryViewmodel>.reactive(
+                                                  viewModelBuilder: () =>
+                                                      DeleteCategoryViewmodel(
+                                                    locator(),
+                                                  ),
+                                                  builder: (_, model, __) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        model.deleteCategory(
+                                                          categoryId: snapshot
+                                                              .data[index]
+                                                              .categoryId,
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        padding: context
+                                                            .insetsSymetric(
+                                                          horizontal: 10,
+                                                          vertical: 5,
+                                                        ),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: const Color(
+                                                                  0xFFFF8514)
+                                                              .withOpacity(
+                                                                  0.12),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                        ),
+                                                        child: const Text(
+                                                          'remove',
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFFFF8514),
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (_, __) => Divider(
+                                          height: 0,
+                                          color: const Color(0xFF9A96A4)
+                                              .withOpacity(0.1),
+                                        ),
+                                        itemCount: snapshot.data.length,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const Spacer(),
-                                Container(
-                                  padding: context.insetsSymetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const
-                                        Color(0xFFFF8514).withOpacity(0.12),
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: const Text(
-                                    'remove',
-                                    style: TextStyle(
-                                      color: Color(0xFFFF8514),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return Expanded(
+                              child: Center(
+                                child: Text(
+                                  'Error: ${snapshot.error}',
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (_, __) => Divider(
-                          height: 0,
-                          color: const Color(0xFF9A96A4).withOpacity(0.1),
-                        ),
-                        itemCount: 5,
-                      ),
-                    )
+                              ),
+                            );
+                          } else {
+                            return const Expanded(
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                        })
                   ],
                 ),
               ),
