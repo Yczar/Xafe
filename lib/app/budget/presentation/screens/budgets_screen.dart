@@ -43,7 +43,6 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
                   stream: locator<ListenToBudgets>().call(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      if (snapshot.data.isNotEmpty) {
                         return ViewModelBuilder<BudgetNotifier>.reactive(
                             viewModelBuilder: () => BudgetNotifier(),
                             builder: (_, model, __) {
@@ -156,15 +155,6 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
                                 ),
                               );
                             });
-                      } else {
-                        return const Expanded(
-                          child: Center(
-                            child: Text(
-                              'No spending categories added yet',
-                            ),
-                          ),
-                        );
-                      }
                     } else if (snapshot.hasError) {
                       return Expanded(
                         child: Center(
