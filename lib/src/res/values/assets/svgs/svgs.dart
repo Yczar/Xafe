@@ -10,6 +10,8 @@ const String _authenticationSvgDir = '$_svgDir/authentication';
 
 ///
 const String kBackArrowIcon = '$_svgDir/app_back_arrow.svg';
+const String kAppAddIcon = '$_svgDir/add_icon.svg';
+const String kAppDeleteIcon = '$_svgDir/app_delete_icon.svg';
 /**
  * [MainScreen svg's]
  */

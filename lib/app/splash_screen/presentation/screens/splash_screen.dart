@@ -11,6 +11,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kColorAppBlack,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: context.insetsSymetric(
@@ -79,14 +80,16 @@ class SplashScreen extends StatelessWidget {
                                 color: kColorWhite,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 16,
+                                fontFamily: 'EuclidaCircular',
                               ),
                               children: [
                                 TextSpan(
                                   text: ' Create an account',
                                   style: TextStyle(
                                     color: kColorWhite,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16,
+                                    fontFamily: 'EuclidaCircular',
                                   ),
                                 ),
                               ]),

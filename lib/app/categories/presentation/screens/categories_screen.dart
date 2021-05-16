@@ -121,7 +121,8 @@ class CategoriesScreen extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   snapshot.data[index]
-                                                      .categoryEmoji,
+                                                          .categoryEmoji ??
+                                                      '',
                                                   style: const TextStyle(
                                                     fontSize: 36,
                                                   ),

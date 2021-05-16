@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:xafe/app/budget/presentation/screens/create_a_budget_screen.dart';
 import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
 import 'package:xafe/app/home/presentation/screens/add_an_expense_screen.dart';
 import 'package:xafe/src/res/res.dart';
@@ -61,9 +62,18 @@ class HomeScreenViewModel extends ChangeNotifier {
                   ),
                 ),
                 const YMargin(25),
-                const BottomSheetItem(
-                  title: 'Create a budget',
-                  svgPath: kCreateBudgetIcon,
+                InkWell(
+                  onTap: () {
+                    popView(context);
+                    navigate(
+                      context,
+                      CreateABudgetScreen(),
+                    );
+                  },
+                  child: const BottomSheetItem(
+                    title: 'Create a budget',
+                    svgPath: kCreateBudgetIcon,
+                  ),
                 ),
                 Padding(
                   padding: context.insetsOnly(left: 40.0, top: 25),

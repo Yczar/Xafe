@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kColorBlue,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [
@@ -229,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                           return const Expanded(
                             child: Center(
                               child: Text(
-                                'No spending categories added yet',
+                                'No expenses added yet',
                               ),
                             ),
                           );
