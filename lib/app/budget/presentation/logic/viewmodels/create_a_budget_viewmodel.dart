@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stacked/stacked.dart';
-import 'package:xafe/app/home/data/models/expense_model.dart';
-import 'package:xafe/app/home/domain/usecases/add_an_expense.dart';
+import 'package:xafe/app/budget/data/models/budget_model.dart';
+import 'package:xafe/app/budget/domain/usecases/create_budget.dart';
 import 'package:xafe/core/error/helpers/helpers.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 
-class AddAnExpenseViewmodel extends BaseViewModel {
-  AddAnExpenseViewmodel(this._addAnExpense);
+class CreateABudgetViewmodel extends BaseViewModel {
+  CreateABudgetViewmodel(this._createBudget);
 
-  final AddAnExpense _addAnExpense;
+  final CreateBudget _createBudget;
 
-  Future addAnExpense({
-    ExpenseModel params,
+  Future createBudget({
+    BudgetModel params,
     BuildContext context,
   }) {
     setBusy(true);
-    return _addAnExpense(params)
+    return _createBudget(params)
       ..then(
         (result) {
           result.fold(
@@ -27,6 +27,7 @@ class AddAnExpenseViewmodel extends BaseViewModel {
               );
             },
             (data) {
+              setBusy(false);
               popView(context);
             },
           );

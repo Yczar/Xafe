@@ -1,21 +1,39 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:xafe/app/budget/presentation/screens/create_a_budget_screen.dart';
-import 'package:xafe/app/categories/presentation/screens/add_spending_category_screen.dart';
-import 'package:xafe/app/home/presentation/screens/add_an_expense_screen.dart';
+import 'package:stacked/stacked.dart';
+import 'package:xafe/app/budget/data/models/budget_model.dart';
+import 'package:xafe/app/budget/presentation/screens/add_a_budget_expense_screen.dart';
+import 'package:xafe/app/budget/presentation/screens/edit_a_budget_screen.dart';
+import 'package:xafe/app/home/presentation/logic/viewmodels/home_screen_viewmodel.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/res/values/assets/svgs/svgs.dart';
 import 'package:xafe/src/utils/navigation/navigation.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
-class HomeScreenViewModel extends ChangeNotifier {
-  void showBottomSheet(BuildContext context) {
+class BudgetNotifier extends BaseViewModel {
+  List<Color> hexColor = [
+    const Color(0xFF52ACFF),
+    const Color(0xFFFF529B),
+    const Color(0xFF02B474),
+    const Color(0xFFFF8514),
+  ];
+
+  Color colorRandom(int currentIndex) {
+    if (currentIndex < hexColor.length) {
+      return hexColor[currentIndex];
+    } else {
+      return hexColor[currentIndex % hexColor.length];
+    }
+  }
+
+  void showBottomSheet(
+    BuildContext context,
+    BudgetModel budgetModel,
+  ) {
     showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
         return IntrinsicHeight(
           child: Container(
             padding: context.insetsSymetric(
@@ -44,7 +62,9 @@ class HomeScreenViewModel extends ChangeNotifier {
                     popView(context);
                     navigate(
                       context,
-                      AddAnExpenseScreen(),
+                      AddABudgetExpenseScreen(
+                        budgetId: budgetModel.budgetId,
+                      ),
                     );
                   },
                   child: const BottomSheetItem(
@@ -67,11 +87,13 @@ class HomeScreenViewModel extends ChangeNotifier {
                     popView(context);
                     navigate(
                       context,
-                      CreateABudgetScreen(),
+                      EditABudgetScreen(
+                        budgetModel: budgetModel,
+                      ),
                     );
                   },
                   child: const BottomSheetItem(
-                    title: 'Create a budget',
+                    title: 'Edit budget',
                     svgPath: kCreateBudgetIcon,
                   ),
                 ),
@@ -85,14 +107,14 @@ class HomeScreenViewModel extends ChangeNotifier {
                 InkWell(
                   onTap: () {
                     popView(context);
-                    navigate(
-                      context,
-                      AddSpendingCategoryScreen(),
-                    );
+                    // navigate(
+                    //   context,
+                    //   AddSpendingCategoryScreen(),
+                    // );
                   },
                   child: const BottomSheetItem(
-                    title: 'Add a spending category',
-                    svgPath: kAddSpendingIcon,
+                    title: 'Delete budget',
+                    svgPath: kAppDeleteIcon,
                   ),
                 ),
                 Padding(
@@ -107,35 +129,6 @@ class HomeScreenViewModel extends ChangeNotifier {
           ),
         );
       },
-    );
-  }
-}
-
-class BottomSheetItem extends StatelessWidget {
-  const BottomSheetItem({
-    Key key,
-    this.svgPath,
-    this.title,
-  }) : super(key: key);
-
-  final String svgPath;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(svgPath),
-        const XMargin(17),
-        Text(
-          title,
-          style: const TextStyle(
-            color: kColorAppBlack,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
     );
   }
 }

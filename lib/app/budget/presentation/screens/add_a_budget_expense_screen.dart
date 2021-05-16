@@ -4,10 +4,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:uuid/uuid.dart';
+import 'package:xafe/app/budget/presentation/logic/viewmodels/add_a_budget_expense_viewmodel.dart';
 import 'package:xafe/app/categories/data/model/category_model.dart';
 import 'package:xafe/app/categories/domain/usecases/listen_to_categories.dart';
 import 'package:xafe/app/home/data/models/expense_model.dart';
-import 'package:xafe/app/home/presentation/logic/viewmodels/add_an_expense_viewmodel.dart';
 import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/components/back_arrow/src/app_back_arrow.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
@@ -15,12 +15,19 @@ import 'package:xafe/src/res/components/forms/helpers/validator_helper.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
-class AddAnExpenseScreen extends StatefulWidget {
+class AddABudgetExpenseScreen extends StatefulWidget {
+  const AddABudgetExpenseScreen({
+    Key key,
+    this.budgetId,
+  }) : super(key: key);
+
+  final String budgetId;
+
   @override
-  _AddAnExpenseScreenState createState() => _AddAnExpenseScreenState();
+  _AddABudgetExpenseScreenState createState() => _AddABudgetExpenseScreenState();
 }
 
-class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
+class _AddABudgetExpenseScreenState extends State<AddABudgetExpenseScreen> {
   ValueNotifier<DateTime> selectedDate = ValueNotifier(null);
   final GlobalKey<FormState> _formKey = GlobalKey();
   ValueNotifier<CategoryModel> _selectedCategory;
@@ -164,9 +171,9 @@ class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
                                         }),
                                     const Spacer(),
                                     ViewModelBuilder<
-                                            AddAnExpenseViewmodel>.reactive(
+                                            AddABudgetExpenseViewmodel>.reactive(
                                         viewModelBuilder: () =>
-                                            AddAnExpenseViewmodel(
+                                            AddABudgetExpenseViewmodel(
                                               locator(),
                                             ),
                                         builder: (_, model, __) {
@@ -177,8 +184,9 @@ class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
                                                   .validate()) {
                                                 if (selectedDate.value !=
                                                     null) {
-                                                  model.addAnExpense(
+                                                  model.addABudgetExpense(
                                                     context: context,
+                                                    budgetId: widget.budgetId,
                                                     params: ExpenseModel(
                                                       expenseId:
                                                           const Uuid().v4(),
@@ -193,7 +201,7 @@ class _AddAnExpenseScreenState extends State<AddAnExpenseScreen> {
                                                         _expenseAmountEditingController
                                                             .text,
                                                       ),
-                                                      expenseDate: '',
+                                                      expenseDate: DateFormat('dd/MM/yy').format(selectedDate.value),
                                                       expenseName:
                                                           // ignore: lines_longer_than_80_chars
                                                           _expenseNameEditingController

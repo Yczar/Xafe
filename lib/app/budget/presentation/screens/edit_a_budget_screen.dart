@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:uuid/uuid.dart';
 import 'package:xafe/app/budget/data/models/budget_model.dart';
-import 'package:xafe/app/budget/presentation/logic/viewmodels/create_a_budget_viewmodel.dart';
+import 'package:xafe/app/budget/presentation/logic/viewmodels/edit_a_budget_viewmodel.dart';
 import 'package:xafe/core/config/di_config.dart';
 import 'package:xafe/src/res/components/back_arrow/src/app_back_arrow.dart';
 import 'package:xafe/src/res/components/buttons/src/xafe_button.dart';
 import 'package:xafe/src/res/res.dart';
 import 'package:xafe/src/utils/scaler/scaler.dart';
 
-class CreateABudgetScreen extends StatefulWidget {
+class EditABudgetScreen extends StatefulWidget {
+  const EditABudgetScreen({
+    Key key,
+    this.budgetModel,
+  }) : super(key: key);
+
+  final BudgetModel budgetModel;
+
   @override
-  _CreateABudgetScreenState createState() => _CreateABudgetScreenState();
+  _EditABudgetScreenState createState() => _EditABudgetScreenState();
 }
 
-class _CreateABudgetScreenState extends State<CreateABudgetScreen> {
-  final ValueNotifier<String> _selectedBudgetInterval = ValueNotifier(null);
+class _EditABudgetScreenState extends State<EditABudgetScreen> {
+  ValueNotifier<String> _selectedBudgetInterval;
   TextEditingController _budgetNameEditingController;
   TextEditingController _budgetAmountEditingController;
   final List<String> _budgetIntervals = [
@@ -28,8 +34,12 @@ class _CreateABudgetScreenState extends State<CreateABudgetScreen> {
   @override
   void initState() {
     super.initState();
-    _budgetNameEditingController = TextEditingController(text: '');
-    _budgetAmountEditingController = TextEditingController(text: '');
+    _budgetNameEditingController =
+        TextEditingController(text: widget.budgetModel.budgetName);
+    _budgetAmountEditingController = TextEditingController(
+      text: widget.budgetModel.budgetAmount,
+    );
+    _selectedBudgetInterval = ValueNotifier(widget.budgetModel.budgetInterval);
   }
 
   @override
@@ -54,9 +64,9 @@ class _CreateABudgetScreenState extends State<CreateABudgetScreen> {
               const YMargin(66.45),
               KAppBackArrow(),
               const YMargin(60.45),
-              const Text(
-                'Create a budget',
-                style: TextStyle(
+              Text(
+                'Edit ${widget.budgetModel.budgetName} budget',
+                style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 24,
                   color: kColorAppBlack,
@@ -102,19 +112,19 @@ class _CreateABudgetScreenState extends State<CreateABudgetScreen> {
                     );
                   }),
               const Spacer(),
-              ViewModelBuilder<CreateABudgetViewmodel>.reactive(
-                  viewModelBuilder: () => CreateABudgetViewmodel(
+              ViewModelBuilder<EditABudgetViewmodel>.reactive(
+                  viewModelBuilder: () => EditABudgetViewmodel(
                         locator(),
                       ),
                   builder: (_, model, __) {
                     return XafeButton(
                       isLoading: model.isBusy,
                       onPressed: () {
-                        model.createBudget(
+                        model.editBudget(
                           context: context,
                           params: BudgetModel(
                             budgetAmount: _budgetAmountEditingController.text,
-                            budgetId: const Uuid().v4(),
+                            budgetId: widget.budgetModel.budgetId,
                             budgetInterval: _selectedBudgetInterval.value,
                             budgetName: _budgetNameEditingController.text,
                           ),
