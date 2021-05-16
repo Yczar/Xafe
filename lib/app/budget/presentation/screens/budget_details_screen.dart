@@ -173,12 +173,15 @@ class BudgetDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const YMargin(39.63),
-                                    const Text(
-                                      'Expense History',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: kColorAppBlack,
+                                    Padding(
+                                      padding: context.insetsOnly(left: 20.0),
+                                      child: const Text(
+                                        'Expense History',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: kColorAppBlack,
+                                        ),
                                       ),
                                     ),
                                     const YMargin(8),
